@@ -5,6 +5,8 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 
+import { ToastService } from "src/app/share/service/toast.service";
+
 const LOGIN_API = environment.apiServer + '/login';
 const LOGOUT_API = environment.apiServer + '/api/auth/logout';
 const REGISTER_API = environment.apiServer + '/register';
@@ -33,7 +35,10 @@ export class AuthService {
   private jwt: JwtHelperService = new JwtHelperService();
   private authStatus: BehaviorSubject<boolean> = new BehaviorSubject(this.isAuthenticated());
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastService,
+    ) { }
 
   // Handle authentication errors
   private errorHandler(error: HttpErrorResponse) {
@@ -72,6 +77,8 @@ export class AuthService {
               localStorage.setItem('enabled', String(userInfo.enabled));
 
               this.authStatus.next(true);
+
+              this.toastService.presentToast('Login success', 'top');
             })
           );
         }),
@@ -90,7 +97,7 @@ export class AuthService {
     this.authStatus.next(false);
     return this.http.post(LOGOUT_API, {}, opts)
       .pipe(
-        map(response => null),
+        map(response => null, this.toastService.presentToast('Logout success', 'top')),
         catchError(this.errorHandler)
       );
   }
@@ -116,8 +123,9 @@ export class AuthService {
             map(userInfo => {
               localStorage.setItem('username', userInfo.username);
               localStorage.setItem('enabled', String(userInfo.enabled));
-              //localStorage.setItem('isAdmin', String(userInfo.isAdmin));
+
               this.authStatus.next(true);
+              this.toastService.presentToast('Register success', 'top');
             })
           );
         }),

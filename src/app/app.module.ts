@@ -13,6 +13,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RegisterComponent } from './component/register/register.component';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
+    IonicModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
