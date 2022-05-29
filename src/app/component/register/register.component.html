@@ -1,0 +1,24 @@
+<p>register works!</p>
+
+<p style="color:red">{{ message }}</p>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        <div class="fadeIn first">
+            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" id="icon" alt="User Icon" />
+          </div>
+  
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="username" formControlName="username">
+        <input type="password" id="login" class="fadeIn third" name="login" placeholder="password" formControlName="password">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="email" formControlName="email">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="phone" formControlName="phone">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="address" formControlName="address">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="picture" formControlName="picture">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="company" formControlName="company">
+        <input type="submit" class="fadeIn fourth" value="Register">
+      </form>
+  
+    </div>
+  </div>

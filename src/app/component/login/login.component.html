@@ -1,1 +1,20 @@
 <p>login works!</p>
+
+
+<p style="color:red">{{ message }}</p>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <div class="fadeIn first">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" id="icon" alt="User Icon" />
+      </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="username" formControlName="username">
+      <input type="password" id="login" class="fadeIn third" name="login" placeholder="password" formControlName="password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+  </div>
+</div>
