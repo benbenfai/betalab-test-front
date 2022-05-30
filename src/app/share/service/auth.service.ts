@@ -46,6 +46,7 @@ export class AuthService {
       console.error(`authentication error: ${error.error.message}`);
     } else {
       console.error(`bad auth response: ${error.status}: ${error.statusText} ${JSON.stringify(error.error)}`);
+      return throwError('Login attempt failed');
     }
     return throwError('Login attempt failed');
   }
@@ -108,7 +109,6 @@ export class AuthService {
       .pipe(
         mergeMap(response => {
           // store JWTs
-          console.log(response)
 
           localStorage.setItem('access_token', response.access_token);
           localStorage.setItem('refresh_token', response.refresh_token);
